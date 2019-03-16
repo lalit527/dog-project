@@ -13056,25 +13056,6 @@ ul.typeahead-list  > li > a.pull-right {
 .ansi-bold { font-weight: bold; }
 
     </style>
-<style type="text/css">
-    body[data-notebook-name] > #header #header-container:not(.show-panel), /* body has data-notebook-name attribute when 
-a notebook is open. this rule won't be applied when the notebook is not open (in 404 view for example) */
-body[data-notebook-name] #menubar-container #maintoolbar:not(.show-panel),
-body[data-notebook-name] #menubar-container ul.navbar-nav:not(.show-panel) {
-  display: none;
-}
-
-#menubar.only-panel #menus.navbar-default {
-    background: #fff;
-    border-color: #fff;
-}
-
-.toolbar.with-statusbar{
-    margin-top: 3px;
-    margin-bottom: 0;
-}
-
-    </style>
 
 
 <style type="text/css">
@@ -13825,6 +13806,18 @@ $$<p>Here, <code>nb_samples</code> is the number of samples, or number of images
 <p><img src="images/sample_cnn.png" alt="Sample CNN"></p>
 <p><strong>Question 4:</strong> Outline the steps you took to get to your final CNN architecture and your reasoning at each step.  If you chose to use the hinted architecture above, describe why you think that CNN architecture should work well for the image classification task.</p>
 <p><strong>Answer:</strong></p>
+<ul>
+<li>3 convolutional layers are created with 3 max pooling layers in between them to learn hierarchy of high level features. Max pooling layer is added to reduce the dimensionality.</li>
+<li>Relu activation function is used for all the layers.</li>
+<li>Convolutional layer is used with filters 16, 32, 64 in each of the convolutional layers.</li>
+<li>Dropout is used before flatten to reduce the overfitting.</li>
+<li>Flatten layer is added to reduce the matrix to row vector. This is because fully connected layer only accepts row vector.</li>
+<li>A fully connected layer of 512 is setup to make the network deeper.</li>
+<li>Dropout is used to reduce overfitting and ensure that the network generalizes well.</li>
+<li>A fully connected layer of 232 is setup to make the network deeper.</li>
+<li>Dropout is used to reduce overfitting and ensure that the network generalizes well.</li>
+<li>Number of nodes in the last fully connected layer were setup as 133 along with softmax activation function to obtain probabilities of the prediction.</li>
+</ul>
 
 </div>
 </div>
@@ -14633,7 +14626,8 @@ test_{network} = bottleneck_features['test']</code></pre>
 </code></pre>
 <p><strong>Question 5:</strong> Outline the steps you took to get to your final CNN architecture and your reasoning at each step.  Describe why you think the architecture is suitable for the current problem.</p>
 <p><strong>Answer:</strong></p>
-<p>First, I used a GlobalAveragePooling layer to flatten the features into a vector that could be fed into a fully-connected layer. I added dropout to handle overfitting. Lastly, the softmax layer predicts the probability of each breed.</p>
+<p>First, of all I am using ResNet50 as an architecture for image classification. 
+In order to find a suitable architecture, I used a GlobalAveragePooling layer to flatten the features into a vector that could be fed into a fully-connected layer. I added dropout to handle overfitting. Lastly, the softmax layer predicts the probability of each breed.</p>
 
 </div>
 </div>
@@ -15231,12 +15225,15 @@ Epoch 100/100
 <h3 id="(IMPLEMENTATION)-Test-Your-Algorithm-on-Sample-Images!">(IMPLEMENTATION) Test Your Algorithm on Sample Images!<a class="anchor-link" href="#(IMPLEMENTATION)-Test-Your-Algorithm-on-Sample-Images!">&#182;</a></h3><p>Test your algorithm at least six images on your computer.  Feel free to use any images you like.  Use at least two human and two dog images.</p>
 <p><strong>Question 6:</strong> Is the output better than you expected :) ?  Or worse :( ?  Provide at least three possible points of improvement for your algorithm.</p>
 <p><strong>Answer:</strong></p>
-<p>The output is better than I expected. There is one error (very less) for the prediction of Input 75 (Test Image: 7) this should return as Dog. And other output are absolutely awesome! It even correctly discovered the human with the snapchat dog filter (Test Image 17).</p>
+<p>The output is better than I expected.</p>
+<ul>
+<li>It looks like the human and dog separation works pretty well</li>
+<li>It predicted the labrador-retriever mutt</li>
+</ul>
 <p>According to my interpretation The output could be better:</p>
 <ul>
-<li>By using Image Augmentation.</li>
-<li>Accuracy could be improved if we provide more data for training (More Breeds can be added).</li>
-<li>Accuracy could be also improved if we increase the depth of the neural network.</li>
+<li>By using Image Augmentation. Using Imgae augmentaion in step 3 resulted in 2.5 increase in accuracy. So it would help here as well.</li>
+<li>More data (images of dogs) can be downloaded and used in the training, some breeds have just a few images.</li>
 <li>Different model architectures can be explored to reduce prediction time while maintaining accuracy.</li>
 </ul>
 
@@ -15642,19 +15639,6 @@ Gussed Breed is in/076.Golden_retriever
 
 </div>
 
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">golden_retriever</span><span class="o">.</span><span class="n">jpeg</span>
-</pre></div>
-
-    </div>
 </div>
 </div>
 
